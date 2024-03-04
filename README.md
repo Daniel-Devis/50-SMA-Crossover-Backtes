@@ -1,36 +1,33 @@
-# Bullish Engulfing Candle Pattern Detection in XBTUSDTM Trading
+# README: SMA Crossover Strategy with Backtrader
 
-This repository contains a Python script that identifies bullish engulfing candle patterns in the trading data of XBTUSDTM, which is a symbol for Bitcoin (BTC) traded against Tether (USDT) in the futures market. BTC is a significant cryptocurrency that often dictates the broader market movements.
+## Overview
+This document explains the implementation and results of a Simple Moving Average (SMA) Crossover strategy using the Backtrader framework for backtesting on cryptocurrency data. The strategy, performance metrics, and specific results are detailed below.
 
-## Engulfing Candle Pattern
+## Strategy Description
+The SMA Crossover strategy is a common technical analysis approach used in trading. This strategy involves two lines: the Simple Moving Average (SMA) and the asset's price line. When the asset's price crosses above the SMA, it is considered a buy signal, and when the price crosses below, it is a sell signal.
 
-An engulfing candle pattern is a type of reversal pattern seen on candlestick charts, typically at the end of a downtrend. A bullish engulfing pattern occurs when a smaller red (or black) candle is followed by a larger green (or white) candle, where the body of the latter completely engulfs the body of the former. This pattern indicates a potential reversal from bearish to bullish sentiment.
+In this implementation, we use a 50-period SMA on the price data of Bitcoin (BTC-USD). A signal to go long (buy) is generated when the price crosses above the SMA, and the position is closed when the opposite crossover occurs.
 
-## Script Overview
+## Simple Moving Average (SMA)
+The SMA is calculated by averaging the closing prices of an asset over a specified number of periods. In this case, we use a 50-period SMA, meaning the average price over the last 50 periods is used to determine the moving average at each point.
 
-The script uses the `ccxt` library to connect to the Kucoin Futures API and fetches the OHLCV (Open, High, Low, Close, Volume) data for the XBTUSDTM symbol. It then processes this data to identify potential buy signals based on the bullish engulfing pattern and additional conditions.
+## SMA Crossover
+The SMA Crossover occurs when the price line intersects with the SMA line. This intersection indicates a potential change in the asset's momentum and is used to trigger buy or sell signals in our strategy.
 
-### Key Features:
+## Sharpe Ratio
+The Sharpe Ratio is a measure used to evaluate the risk-adjusted return of an investment. It is calculated by subtracting the risk-free rate from the return of the investment and dividing the result by the investment's standard deviation of returns. A higher Sharpe Ratio indicates a more attractive risk-adjusted return.
 
-- **Data Retrieval:** Fetches historical OHLCV data for XBTUSDTM from Kucoin Futures.
-- **Engulfing Pattern Detection:** Identifies bullish engulfing patterns using a custom function that analyses daily price movements.
-- **Buy Signal Generation:** Generates buy signals not only based on the engulfing pattern but also checks if the closing price is at least 4% higher than the opening price to catch significant bullish momentum. Additionally, it ensures that the price and volume two days prior were positive, adding another layer of confirmation to the signal.
-- **Visualisation:** Utilises `mplfinance` to plot the candlestick chart, highlighting the buy signals with green arrows.
+## Good Sharpe Ratio
+A Sharpe Ratio greater than 1 is considered good, indicating that the returns are better than the risk taken. Ratios above 2 are considered very good, and above 3 are excellent. In the context of this backtest, a Sharpe Ratio of 4.50 signifies an excellent risk-adjusted return.
 
-### Usage:
+## Results
+- **Sharpe Ratio:** 4.5024605835703735
+- **Number of Transactions: 17
+- **Initial Portfolio Value: $1,000,000
+- **Final Portfolio Value: $2,049,970.82
+- **Return on Investment (ROI): 105.00%
 
-1. Install the necessary Python libraries: pandas, numpy, mplfinance, ccxt, and matplotlib.
-2. Ensure you have valid API credentials for Kucoin Futures.
-3. Run the script to analyse the data and visualise the buy signals.
+These results indicate a highly successful backtest, with a significant ROI and an excellent Sharpe Ratio, suggesting that the strategy achieved returns that well-compensated for the risk incurred.
 
-## Interpretation
-
-The script is designed to assist traders and analysts in identifying potential buying opportunities based on historical data. However, it's crucial to combine these signals with other forms of analysis and not rely solely on one indicator.
-
-## Customisation
-
-Users can modify the script to adjust the parameters, such as the percentage difference between the open and close prices or the timeframe of the data, to fit their trading strategy or analysis needs.
-
-## Disclaimer
-
-The script is for educational and analytical purposes only. Always conduct your due diligence and consult with a financial adviser before making trading decisions.
+## Conclusion
+The SMA Crossover strategy implemented in this backtest demonstrates a potent approach to trading Bitcoin, with substantial returns and a high Sharpe Ratio. It is crucial to remember that past performance is not indicative of future results, and this strategy should be tested in different conditions and assets to ensure its robustness.
